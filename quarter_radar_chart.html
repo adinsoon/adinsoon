@@ -1,0 +1,79 @@
+<html>
+  <!-- In order to have a gif please make screenshots of chart and make a gif from them. -->
+  <head>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
+    <!-- You can set own width and height. Percentages are also accepted. -->
+    <style type="text/css">
+      html, body, #container {
+        width: 350;
+        height: 350;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script>
+    anychart.onDocumentReady(function () {
+      // you can add as many objects as you want
+      // you can add as many criterias as you want and their amount doesn't have to match between the objects
+      // in my example from bio every object is another quarter of the year 
+      // and every criteria is technology that I use or learn 
+     var data1 = [
+       {x: "Text1", value: 1},
+       {x: "Text2", value: 1},
+       {x: "Text3", value: 2},
+       {x: "Text4", value: 2},
+       {x: "Text5", value: 3},
+       {x: "Text6", value: 3},
+       {x: "Text7", value: 4}
+     ];
+
+     var data2 = [
+       {x: "Text1", value: 5},
+       {x: "Text2", value: 6},
+       {x: "Text3", value: 7},
+       {x: "Text4", value: 8},
+       {x: "Text5", value: 9},
+     ];    
+ 
+     // create radar chart
+     var chart = anychart.radar();
+
+     // set chart yScale settings
+     chart.yScale()
+        // starting scale from 0 
+       .minimum(0)
+        // you can set your own maximum value 
+       .maximum(10)
+        // determines the degree of the interval, preferably set to 1
+       .ticks({'interval':1});
+
+      // color alternating cells but you are free to use others like black for example
+      // numerical value is degree of color intensity
+      chart.yGrid().palette(["grey 0.1", "grey 0.2"]);
+
+      // first object
+      // #E55934 is hex color 
+      // 0.7 is transparency value
+      chart.area(data1).name('Data 1').markers(true).fill("#E55934", 0.7).stroke("#E55934")
+      // second object
+      chart.area(data2).name('Data 2').markers(true).fill("#9BC53D", 0.4).stroke("#9BC53D")
+      // every next object is added in the same way
+
+      // set chart title
+      chart.title("Title of Chart")
+        // set data legend 
+        .legend(true);
+
+      // set container id for the chart
+      chart.container('container');
+      // initiate chart drawing
+      chart.draw();
+
+    });
+  </script>
+</html>
